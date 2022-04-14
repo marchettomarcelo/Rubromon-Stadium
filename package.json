@@ -1,0 +1,17 @@
+{
+  "name": "site_pygame",
+  "version": "1.0.0",
+  "description": "Site com informacoes sobre o jogo em pygame. 1 semestre cc insper",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "express": "^4.17.3"
+  },
+  "scripts": {
+    "dev": "nodemon src/app.js",
+    "start": "node src/app.js"
+  }
+}
