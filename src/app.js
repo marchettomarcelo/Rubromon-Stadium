@@ -5,7 +5,7 @@ const app = express()
 const publicDirectoryPath = path.join(__dirname, "../public")
 app.use(express.static(publicDirectoryPath))
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3001
 
 app.all("*", (req, res)=>{
     res.render("index.html")
