@@ -8,7 +8,7 @@ app.use(express.static(publicDirectoryPath))
 const port = process.env.PORT || 3000
 
 app.all("*", (req, res)=>{
-    res.render("index.html")
+    res.render("index")
 })
 
 app.listen(port, ()=>{
