@@ -45,6 +45,9 @@ img{
     align-items: center;
     justify-content: center;
     height: auto;
+    background-image: url(./assets/insper.png);
+    background-size: cover;  
+    
 }
 
 
@@ -105,3 +108,17 @@ button{
     border-radius: 5px;
     cursor: pointer;
 }
+
+#texto{
+    background: rgba( 255, 255, 255, 0.2 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 9px );
+    -webkit-backdrop-filter: blur( 9px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    height: auto;
+    padding: 30px;
+    margin: 40px;
+}
+
+/* http://www.retromancers.com/retro/ */
