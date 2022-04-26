@@ -11,7 +11,7 @@
     "express": "^4.17.3"
   },
   "scripts": {
-    "dev": "nodemon src/app.js -e *",
+    "dev": "nodemon src/app.js -e js,html,css ",
     "start": "node src/app.js"
   }
 }

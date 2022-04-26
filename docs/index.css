@@ -1,3 +1,11 @@
+:root{
+    --cinza: #F0F0F1;
+}
+
+section{
+    height: 300px;
+}
+
 body{
     margin: 0px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -13,7 +21,7 @@ header{
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background-color:beige;
+    background-color:#d4d4d4;
     margin: 0px;
     padding: 10px;
 }
@@ -26,6 +34,37 @@ header{
     
 }
 
+
 img{
     width: 80px;
+}
+
+#section-title{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+}
+
+
+#section-video{
+    background-color: var(--cinza);
+}
+
+#section-download{
+    
+}
+
+#section-logs{
+    background-color: var(--cinza);
+}
+
+#section-heuristica{
+
+}
+
+footer{
+    background-color: #8a8a8a;
+    height: 150px;
 }
