@@ -8,7 +8,8 @@ section{
 
 body{
     margin: 0px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 h1{
@@ -21,9 +22,11 @@ header{
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background-color:#d4d4d4;
+    /* background-color:#d4d4d4; */
     margin: 0px;
     padding: 10px;
+    
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
 
 #div-botoes{
@@ -47,6 +50,8 @@ img{
     height: auto;
     background-image: url(./assets/insper.png);
     background-size: cover;  
+    border-top: black solid 4px;
+    border-bottom: black solid 4px;
     
 }
 
@@ -62,6 +67,8 @@ img{
 
     gap: 20px;
     padding: 20px;
+    padding-bottom: 40px;
+
 }
 iframe{
     border: black solid 8px;
@@ -79,18 +86,21 @@ iframe{
 }
 
 #section-logs{
-    padding-left: 60px;
-    padding-right: 60px;
+    padding: 60px;
+   
     background-color: var(--cinza);
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    height: auto;
 
 }
 
 #section-heuristica{
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 footer{
@@ -121,4 +131,30 @@ button{
     margin: 40px;
 }
 
+h1{
+    font-weight:900;
+    font-size: xx-large;
+}
+
+li{
+    margin: 8px;
+}
+
+.div-icones{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.div-icones2{
+    align-self: flex-start;
+    height: auto;
+    display: flex;
+    justify-content:right;
+    align-items:flex-start;
+    flex-direction: column;
+}
+
 /* http://www.retromancers.com/retro/ */
+/* https://marchettomarcelo.github.io/pygame/ */
