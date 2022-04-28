@@ -78,6 +78,8 @@ iframe{
 #section-download{
     padding-left: 60px;
     padding-right: 60px;
+
+    color: aliceblue;
     
     display: flex;
     flex-direction: row;
@@ -97,10 +99,11 @@ iframe{
 
 }
 
-#section-heuristica{
+#section-heuristica {
     display: flex;
     align-items: center;
     justify-content: center;
+    color: aliceblue;
 }
 
 footer{
@@ -158,3 +161,35 @@ li{
 
 /* http://www.retromancers.com/retro/ */
 /* https://marchettomarcelo.github.io/pygame/ */
+
+:root {
+  --gradient: linear-gradient(45deg, purple, red, blue);
+}
+
+body {
+  background-image: var(--gradient);
+  background-size: 400%;
+  animation: bg-anim 20s infinite alternate;
+}
+
+@keyframes bg-anim {
+  0% {
+    background-position: left;
+  }
+  100% {
+    background-position: right;
+  }
+}
+
+a {   
+    color: white;   
+}
+
+a:active {
+    color: white;
+}
+
+a[tabindex]:focus {
+    color:blue;
+    outline: none;
+}
