@@ -58,11 +58,12 @@ img{
 #section-telas-jogo{
     display: flex;
     flex-direction: column;
+    color: white;
 
     align-items: center;
     justify-content: center;
 
-    padding: 20px;
+    padding: 30px;
 }
 
 #section-video{
@@ -103,7 +104,8 @@ iframe{
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content:center;
+    gap: 20%;
     height: auto;
 
 }
