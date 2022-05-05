@@ -7,7 +7,8 @@ class GameOver:
             'font_20' : pygame.font.Font(pygame.font.get_default_font(), 20),
             'font_12' : pygame.font.Font(pygame.font.get_default_font(), 12),
             'font_60' : pygame.font.Font(pygame.font.get_default_font(), 60),
-            'background' : pygame.image.load("assets/backgrounds/gameover.png")
+            'background' : pygame.image.load("assets/backgrounds/gameover.png"),
+            'click_sound' : pygame.mixer.Sound('assets/sons/click_sound.mp3')
             }
 
         self.result = result
@@ -21,6 +22,7 @@ class GameOver:
                 return QUIT
             if ev.type == pygame.MOUSEBUTTONDOWN:
                 if self.clicked_button(self.button_play, pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1]):
+                    pygame.mixer.Channel(9).play(self.assets['click_sound'])
                     return TITLE
 
         return GAMEOVER

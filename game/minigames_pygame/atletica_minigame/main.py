@@ -46,7 +46,7 @@ def gameloop(window, state):
 
 
 def run_minigame2(window):
-    atletica_music = pygame.mixer.Sound('assets\sons\musica_mingames.mp3')
+    atletica_music = pygame.mixer.Sound('assets/sons/musica_mingames.mp3')
     pygame.mixer.music.pause()
     pygame.mixer.Channel(1).play(atletica_music)
     

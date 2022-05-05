@@ -20,7 +20,8 @@ class Battle:
             'player2_skin' : characters[player2]['skins'][1],
             'battle_border' : pygame.image.load("assets/sprites/Battle_BorderJPG.jpg"),
             'attack_colors' : pygame.image.load('assets/attack_colors.png'),
-            'hp_bar' : pygame.image.load("assets/hp_bar.png")
+            'hp_bar' : pygame.image.load("assets/hp_bar.png"),
+            'click_sound' : pygame.mixer.Sound('assets/sons/click_sound.mp3')
             }
         
         self.hp_bars = {
@@ -68,6 +69,7 @@ class Battle:
             if ev.type == pygame.KEYDOWN and not self.clicked_key:
                 self.clicked_key = True
                 if ev.key == pygame.K_SPACE or ev.key == pygame.K_RETURN:
+                    pygame.mixer.Channel(9).play(self.assets['click_sound'])
                     self.current_menu = self.menu[self.current_item]
                     if self.current_menu in ['<- Back', "You can't run!", "What are you doing?", "Go fight.", 'It was a joke', 'There are no items', 'Go KICK HIM!']:
                         self.current_menu = '<- Back'
@@ -82,10 +84,12 @@ class Battle:
                         else:
                             self.player_attacking = self.player1
                 if ev.key == pygame.K_UP:
+                    pygame.mixer.Channel(9).play(self.assets['click_sound'])
                     self.current_item -= 1
                     if self.current_item < 0:
                         self.current_item = len(self.menu) - 1
                 if ev.key == pygame.K_DOWN:
+                    pygame.mixer.Channel(9).play(self.assets['click_sound'])
                     self.current_item += 1
                     if self.current_item >= len(self.menu):
                         self.current_item = 0

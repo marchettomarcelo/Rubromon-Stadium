@@ -4,7 +4,8 @@ from global_vars import *
 class Title:
     def __init__(self):
         self.assets = {
-            'background' : pygame.image.load("assets/backgrounds/title_screen.png")
+            'background' : pygame.image.load("assets/backgrounds/title_screen.png"),
+            'click_sound' : pygame.mixer.Sound('assets/sons/click_sound.mp3')
             }
 
         self.name = TITLE
@@ -17,6 +18,7 @@ class Title:
                 return QUIT
             if ev.type == pygame.MOUSEBUTTONDOWN:
                 if self.clicked_button(self.button_play, pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1]):
+                    pygame.mixer.Channel(9).play(self.assets['click_sound'])
                     return RULES
                 if self.clicked_button(self.button_quit, pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1]):
                     return QUIT

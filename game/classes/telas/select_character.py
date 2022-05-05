@@ -7,7 +7,9 @@ class SelectCharacter():
         self.assets = {
             'font_20' : pygame.font.Font(pygame.font.get_default_font(), 20),
             'font_12' : pygame.font.Font(pygame.font.get_default_font(), 12),
-            'background' : pygame.image.load('assets/backgrounds/select_character.png')
+            'background' : pygame.image.load('assets/backgrounds/select_character.png'),
+            'click_sound' : pygame.mixer.Sound('assets/sons/click_sound.mp3'),
+            'cant_click_sound' : pygame.mixer.Sound('assets/sons/error_click.mp3')
             }
 
         self.name = SELECT_CHARACTER
@@ -36,31 +38,37 @@ class SelectCharacter():
                 return QUIT
             if ev.type == pygame.MOUSEBUTTONDOWN:
                 if self.clicked_button(self.button_back, pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1]):
+                    pygame.mixer.Channel(9).play(self.assets['click_sound'])
                     return RULES
             if ev.type == pygame.KEYDOWN and not self.clicked_key:
                 if ev.key == pygame.K_SPACE or ev.key == pygame.K_RETURN:
                     if self.current_menu == 'Player 1':
+                        pygame.mixer.Channel(9).play(self.assets['click_sound'])
                         self.player1 = self.menu[self.current_item]
                         self.current_menu = 'Player 2'
                     elif self.player1 != self.menu[self.current_item]:
+                        pygame.mixer.Channel(9).play(self.assets['click_sound'])
                         self.player2 = self.menu[self.current_item]
 
                         screens['player1'] = self.player1
                         screens['player2'] = self.player2
                         return BATTLE
                     else:
-                        pass
+                        pygame.mixer.Channel(9).play(self.assets['cant_click_sound'])
                 if ev.key == pygame.K_ESCAPE:
+                    pygame.mixer.Channel(9).play(self.assets['click_sound'])
                     if self.current_menu == 'Player 1':
                         return RULES
                     else:
                         self.player1 = ''
                         self.current_menu = 'Player 1'
                 if ev.key == pygame.K_UP:
+                    pygame.mixer.Channel(9).play(self.assets['click_sound'])
                     self.current_item -= 1
                     if self.current_item < 0:
                         self.current_item = len(self.menu) - 1
                 if ev.key == pygame.K_DOWN:
+                    pygame.mixer.Channel(9).play(self.assets['click_sound'])
                     self.current_item += 1
                     if self.current_item >= len(self.menu):
                         self.current_item = 0

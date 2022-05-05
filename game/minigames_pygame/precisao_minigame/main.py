@@ -44,7 +44,7 @@ def gameloop(window, state):
         state["screen"].draw(window, state)
     
 def run_minigame4(window):
-    atletica_music = pygame.mixer.Sound('assets\sons\musica_mingames.mp3')
+    atletica_music = pygame.mixer.Sound('assets/sons/musica_mingames.mp3')
     pygame.mixer.music.pause()
     pygame.mixer.Channel(3).play(atletica_music)
     
