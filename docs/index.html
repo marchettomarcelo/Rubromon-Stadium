@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="index.css">
-    <title>Sitezinho do pygame</title>
+    <title>Rubromon Stadium</title>
+    <link rel="icon" href="./assets/raposa.png">
 </head>
 <body>
     <header>
@@ -16,9 +17,11 @@
         </div>
 
         <div id="div-botoes">
-            <a href="./heuristica.html" tabindex="1"><h3>Heurística</h3></a>
-            <a href="./download.html"><h3>Download</h3></a>
-            <a href="./logs.html"><h3>Dev Logs</h3></a>
+            <a href="#section-heuristica"><h3>Heurística</h3></a>
+            <a href="#section-download"><h3>Download</h3></a>
+            <a href="#section-logs" ><h3>Dev Logs</h3></a>
+            <a href="#section-video" ><h3>Video</h3></a>
+            
         </div>
     </header>
 
@@ -36,7 +39,7 @@
             
 
             <ul>
-                <li> Escolha o modo de jogo entre single-player e multi-player</li>
+                <li>O jogo deve ser jogado por duas pessoas</li>
                 <li> Selecione o personagem que te acompanhará no campo de batalha</li>
                 <li>Se prepare para uma batalha eletrizante, escolhendo entre 4 movimentos exclusivos do seu Inspermón! </li>
                 <li> Ao zerar os pontos de vida do seu oponente, você se torna o campeão!</li>
@@ -77,9 +80,12 @@
         <section id="section-download">
 
             <div>
-                <h3>Aqui voce pode fazer o download do jogo men</h3>
-                <p>O jogo foi criado totalmente em pygame com muito carinho &lt;3 </p>
                 <h3>Para fazer o download do jogo:</h3>
+                <ol>
+                    <li>Faça o  download de da linguagem Python 3</li>
+                    <li>Clique no ícone ao lado e faça o download dos arquivos</li>
+                    <li>Depois de baixar os arquivos, abra-os em um aplicativo que <br> consiga executar arquivos de Python ( recomendamos o VSCODE )</li>
+                </ol>
                 <p>Faça o  download de python 3. Em seguida, baixe os arquivos do jogo. <br> Por fim, navegue para o arquivo "main.py" e execute-a  </p>
             </div>
 
@@ -103,7 +109,7 @@
                     <button>
                         <svg xmlns="http://www.w3.org/2000/svg" class="icone" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                          </svg>
+                        </svg>
                     </button>
                 </a>
             </div>
@@ -180,15 +186,77 @@
         </section>
         
         <section id="section-heuristica">
-            <h3>Aqui está a avaliação das heurística do jogo <br><br> EM DESENVOLVIMENTO </h3> 
+
             
+            <div>
+                
+                
+                <h5>Correspondência entre o sistema e o mundo real:</h5>
+                
+                <ul>
+                    <li>O "para  fazer o Download do jogo" não leva em conta um usuário que nunca usou o python <br> e não dá as orientações de navegação no terminal do computador necessárias.</li>
+                </ul>
+                 
+                
+    
+
+                <h5>Consistência e padronização:</h5>
+                <ul>
+                    <li> A diferenciação entre título e subtítulo do devlog não é suficientemente contrastante - Nome / O que fez.</li>
+                    <li>  A pontuação textual do site é inconsistente <br>
+                        ex: aqui voce pode acompanhar cadas coisa
+                        aqui voce pode fazer o download do jogo men</li>
+                    <li>  A capitalização é inconsistente ex: 28.04 integração de um novo minigame</li>
+                    <li>  Os ícones utilizados consistentes tanto internamente, quanto externamente</li>
+                    <li>  Na página de Dev logs, o botão e o título se encontram no meio, <br> assim criando uma inconsistência em relação à tela principal e a de download</li>
+                </ul>
+                               
+
+                
+                
+                
+                <h5>Reconhecimento ao invés de memorização:</h5>
+                
+                <ul>
+                    <li> Sugestão: os botões iniciais de redirecionamento da página, <br>
+                         ou seja, o cabeçalho poderia acompanhar o movimento do usuário</li>
+                </ul>
+                
+              
+                
+                <h5>Estética e design minimalista:</h5>
+
+                <ul>
+                    <li> A tentativa de usar design minimalista no trecho do vídeo acabou por chamar <br> mais atenção para os espaços vazios nos lados ao invés de destacar o vídeo em si.</li>
+                    <li> A imagem no fundo do texto inicial compete a atenção com o texto sobreposto <br>(embaixo de Rubromon Stadium ) por estar em uma cor clara.</li>
+                </ul>
+               
+                
+                
+                
+                <h5>Ajuda e documentação:</h5>
+
+                <ul>
+                    <li> Mesma queixa da Heurística 2 sobre ajuda para download, etc.</li>
+                </ul>
+               
+                
+
+            </div>
             
+            <div class="div-icones2"> 
+
+                <h2>Heurística</h2>
+                <button>
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icone" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
+                      </svg>
+                </button>
+            </div>
+
         </section>
 
     </div>
-
-    <footer>
-        <h3>EM DESENVOLVIMENTO</h3>
-    </footer>
 </body>
 </html>
