@@ -1,8 +1,21 @@
+'''
+Esse módulo é responsável pela lógica da tela de Fim de Jogo e todas as suas ações
+'''
+
 import pygame
 from global_vars import *
 
 class GameOver:
+    '''
+    Classe Fim de Jogo:
+    - Tela de Fim de Jogo com informação de quem ganhou a partida
+    '''
     def __init__(self, result):
+        '''
+        - Inicia todaas as variáveis necessárias para a tela (assets, resultado, nome da tela)
+
+        result -> str com o nome do personagem vencedor da batalha
+        '''
         self.assets = {
             'font_20' : pygame.font.Font(pygame.font.get_default_font(), 20),
             'font_12' : pygame.font.Font(pygame.font.get_default_font(), 12),
@@ -17,10 +30,18 @@ class GameOver:
         self.button_play = pygame.Rect(485, 423, 135, 35)
     
     def update_events(self, screens, window):
+        '''
+        Função atualiza eventos:
+        - Trata todos os eventos de entrada do usuário e determina a próxima ação na batalha
+
+        screens -> dicionário com todas as telas e variáveis principais (resultado, etc.)
+        window -> variável que armazena a janela do jogo
+        '''
         for ev in pygame.event.get():
             if ev.type == pygame.QUIT:
                 return QUIT
             if ev.type == pygame.MOUSEBUTTONDOWN:
+                #voltar para o menu inicial
                 if self.clicked_button(self.button_play, pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1]):
                     pygame.mixer.Channel(9).play(self.assets['click_sound'])
                     return TITLE
@@ -28,6 +49,11 @@ class GameOver:
         return GAMEOVER
 
     def draw(self, window):
+        '''
+        - Desenha todos os elementos da tela final
+
+        window -> variável que armazena a janela do pygame
+        '''
         window.fill((0, 0, 0))
         window.blit(self.assets['background'], (0,0))
         
@@ -38,6 +64,14 @@ class GameOver:
         pygame.display.update()
     
     def clicked_button(self, button, coordx, coordy):
+        '''
+        Função Clicou Botão:
+        - Retorna se o usuário clicou com o mouse em um certo botão
+
+        button -> pygame.rect com retângulo do botão
+        coordx -> coordenada x do clique do mouse
+        coordy -> coordenada y do clique do mouse 
+        '''
         if button[0] <= coordx <= button[0] + button[2] and button[1] <= coordy <= button[1] + button[3]:
             return True
         else:

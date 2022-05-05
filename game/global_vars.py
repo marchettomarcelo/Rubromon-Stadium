@@ -1,9 +1,15 @@
+'''
+Esse módulo é responsável por armazenar todas as constantes globais do jogo
+'''
+
 import pygame
 
+#informações sobre a tela do jogo
 WIDTH = 640
 HEIGHT = 480
 FPS = 60
 
+#nome de todas as telas
 TITLE = "title"
 QUIT = "quit"
 RULES = "rules"
@@ -11,6 +17,10 @@ SELECT_CHARACTER = 'select_character'
 BATTLE = "battle"
 GAMEOVER = "game_over"
 
+#informações base de todos os personagens:
+#   - HP
+#   - Skins
+#   - Ataques
 characters = {
             'Diabo Loiro' : {
                 'hp': 1000,

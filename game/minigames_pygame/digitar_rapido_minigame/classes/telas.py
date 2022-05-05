@@ -1,17 +1,37 @@
+'''
+Esse módulo é responsável pelas classes de todas as telas utilizadas no Minigame RataType
+'''
+
 import random
 import pygame
 
+
 class Inicialize_minigame():
+    '''
+    Classe Iniciar_Minigame:
+    - Tela de apresentação do minigame com suas regras
+    '''
     def __init__(self):
+        '''
+        Inicializa variáveis necessárias (no caso, apenas o nome da tela)
+        '''
         self.name = "Inicialize_minigame"
         
     
     def draw(self, window, state):
+        '''
+        Função desenha tela de início do minigame
+        '''
         window.blit(state["fundo"], (0,0))
         pygame.display.update()
         
 
     def update_events(self, state):
+        '''
+        Função cura os eventos de entrada do jogador na tela inicial e a atualiza
+
+        state -> variável armazena as variáveis principais do minigame
+        '''
         for ev in pygame.event.get():
             if ev.type == pygame.QUIT:
                 return "quit"
@@ -20,7 +40,14 @@ class Inicialize_minigame():
                 return "Minigame1"
 
 class Finalize_minigame():
+    '''
+    Classe Finalizar_Minigame:
+    - Tela de finalização do minigame que apresenta a pontuação do jogador
+    '''
     def __init__(self):
+        '''
+        Inicializa variáveis necessárias para funcionamento da tela (nome da tela, assets)
+        '''
         self.name = "Finalize_minigame"
         
         self.assets = {
@@ -28,6 +55,12 @@ class Finalize_minigame():
         }
         
     def draw(self, window, state):
+        '''
+        Desenha a tela de finalização do minigame com as atualizações
+
+        window -> armazena a tela do pygame
+        state -> dicionário com todas as informações gerais do minigame
+        '''
         window.fill((255,255,255))
         
         texto2 = self.assets["fonte_30"].render(f'{state["tempo"]}',  True, (255, 255, 255))
@@ -40,6 +73,11 @@ class Finalize_minigame():
         
 
     def update_events(self, state):
+        '''
+        Função cura os eventos de entrada do jogador na tela final e a atualiza
+
+        state -> variável armazena as variáveis principais do minigame
+        '''
         for ev in pygame.event.get():
             if ev.type == pygame.QUIT:
                 return "quit"
@@ -51,7 +89,14 @@ class Finalize_minigame():
 
 
 class Minigame1:
+    '''
+    Classe Minigame:
+    - Tela do minigame em si, com a lógica principal da digitação das palavras aleatórias
+    '''
     def __init__(self):
+        '''
+        Inicializa todas as variáveis necessárias (imagens, sons, lista de palavras aleatórias)
+        '''
         self.correct_word_sound = pygame.mixer.Sound('assets/sons/palavra_certa.mp3')
 
         self.assets = {
@@ -64,6 +109,7 @@ class Minigame1:
 
         sorteadas = []
 
+        #sorteia 3 palavras do banco 
         for i in range(3):
             sorteadas.append(banco_palavras[random.randint(0,len(banco_palavras) -1)] )
 
@@ -71,6 +117,8 @@ class Minigame1:
         self.indice_palavras_sorteadas = 0
 
         self.name = "Minigame1"
+
+        #informações para tecla digitada
         self.last_click = 0
         self.last_character_id = " "
         self.palavra_sendo_escrita = ""
@@ -80,15 +128,23 @@ class Minigame1:
         self.backspace_clicked = False
 
         
-
-
     def draw(self, window, state):
+        '''
+        Desenha a tela do minigame com as palavras sorteadas de acordo com cor
+           - branca: ainda a ser digitada
+           - verde: já foi digitada com sucessp
+
+        window -> armazena a tela do pygame
+        state -> dicionário com todas as informações gerais do minigame
+        '''
 
         window.fill((0, 0, 0))
 
         texto1 = self.assets["fonte_24"].render(f"Digite as seguintes palavras, em sequência,", True, (255, 255, 255))
         texto2 = self.assets["fonte_24"].render(f"o mais rápido possível!", True, (255,255, 255))
 
+        #palavras sorteadas
+        #de acordo com o índice da palavra que está sendo digitada, as anteriores precisam ser verdes!
         palavra1 = self.assets["fonte_24"].render(f"{self.palavras_sorteadas[0]},", True, (50, 131, 168))
         palavra2 = self.assets["fonte_24"].render(f"{self.palavras_sorteadas[1]},", True, (50, 131, 168))
         palavra3 = self.assets["fonte_24"].render(f"{self.palavras_sorteadas[2]},", True, (50, 131, 168))
@@ -118,6 +174,13 @@ class Minigame1:
 
 
     def update_events(self, state):
+        '''
+        Função cura os eventos de entrada do jogador na tela de minigame e atualiza as palavras
+
+        state -> variável armazena as variáveis principais do minigame
+        '''
+
+        #lista de todas as letras que o jogador pode inputar no teclado
         letras = [
             pygame.K_a,     
             pygame.K_b,     
@@ -155,12 +218,15 @@ class Minigame1:
             
             if ev.type == pygame.KEYDOWN and ev.key in letras:
                 
+                #usando o id do último char digitado, impede que o usuário digite o mesmo duas veze
+                # seguidas
                 if self.last_character_id != ev.key :
                     self.palavra_sendo_escrita += chr(ev.key)
                     self.last_character_id = ev.key
 
                     
-
+            #apaga a última letra
+            # tag backspace_clicked impede que o jogador segure o botão sem querer e apague tudo
             if ev.type == pygame.KEYDOWN and ev.key == pygame.K_BACKSPACE and self.backspace_clicked == False:
                 self.backspace_clicked = True
 
@@ -173,16 +239,13 @@ class Minigame1:
             if ev.type == pygame.KEYUP and ev.key == pygame.K_BACKSPACE:
                 self.backspace_clicked = False
 
-            # if ev.type == pygame.KEYDOWN and ev.key == pygame.K_RETURN:
-
+            #quando o jogador termina de digitar a palavra corretamente, atualiza para a próxima
             if self.palavra_sendo_escrita == self.palavras_sorteadas[self.indice_palavras_sorteadas]:
                 pygame.mixer.Channel(4).play(self.correct_word_sound)
                 self.palavra_sendo_escrita = ""
                 
+                #finaliza se as 3 palavras forem digitadas
                 if self.indice_palavras_sorteadas == 2:
-                    
-                    # print(f"Voce demorou {  (pygame.time.get_ticks() - self.quando_iniciou) /1000} segundos para teminar esse minigame!")
-                    
                     state["tempo"] = (pygame.time.get_ticks() - self.quando_iniciou) /1000
                     return "Finalize_minigame"
                 

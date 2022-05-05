@@ -1,3 +1,7 @@
+'''
+Esse é o módulo principal do jogo, onde o loop principal ocorre
+'''
+
 import pygame
 from classes.telas.select_character import SelectCharacter
 from classes.telas.title_screen import Title
@@ -8,6 +12,11 @@ from global_vars import *
 
 
 def initialize():
+    '''
+    Inicializa o pygame, o mixer, o clock e todas as variáveis principais do jogo 
+    WIDTH = 640
+    HEIGHT = 480
+    '''
     pygame.init()
 
     pygame.mixer.init()
@@ -32,10 +41,22 @@ def initialize():
 
 
 def finalize():
+    '''
+    Função finaliza o pygame
+    '''
     pygame.quit()
 
 
 def update_events(screens, clock):
+    '''
+    Função hub de mudança de telas:
+    - Atualiza o FPS (60)
+    - Recebe o nome da próxima tela e compara. Caso seja diferente do nome atual, troca para essa tela
+      e incializa sua música
+
+    screens -> dicionário de telas com informações de próx. tela, players e resultado
+    clock -> variável que guarda o pygame.clock
+    '''
     clock.tick(FPS)
     screens['current_screen'] = screens['screen'].update_events(screens, window)
 
@@ -64,6 +85,14 @@ def update_events(screens, clock):
 
 
 def gameloop(window, screens, clock):
+    '''
+    Loop principal do jogo:
+    - Trata os eventos e desenha a tela
+
+    window -> variável da tela do pygame
+    screens -> dicionário de telas com informações de próx. tela, players e resultado
+    clock -> variável que guarda o pygame.clock
+    '''
     while update_events(screens, clock):
         screens['screen'].draw(window)
 

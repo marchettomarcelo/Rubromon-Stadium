@@ -1,3 +1,7 @@
+'''
+Esse módulo é responsável pela lógica de toda a batalha do jogo    
+'''
+
 import pygame
 from global_vars import *
 from minigames_pygame.atletica_minigame.main import *
@@ -6,7 +10,17 @@ from minigames_pygame.memorizacao_minigame.main import *
 from minigames_pygame.precisao_minigame.main import *
 
 class Battle:
+    '''
+    Classe Batalha:
+    - Tela de batalha de turnos dos personagens do jogo
+    '''
     def __init__(self, player1, player2):
+        '''
+        - Inicia todas as variáveis necessárias da tela (jogadores, assets, barras de hp, etc.)
+
+        player1 -> str de nome do personagem do jogador 1
+        player2 -> str de nome do personagem do jogador 2
+        '''
         self.name = BATTLE
         self.player1 = player1
         self.player2 = player2
@@ -19,11 +33,12 @@ class Battle:
             'player1_skin' : characters[player1]['skins'][0],
             'player2_skin' : characters[player2]['skins'][1],
             'battle_border' : pygame.image.load("assets/sprites/Battle_BorderJPG.jpg"),
-            'attack_colors' : pygame.image.load('assets/attack_colors.png'),
-            'hp_bar' : pygame.image.load("assets/hp_bar.png"),
+            'attack_colors' : pygame.image.load('assets/sprites/attack_colors.png'),
+            'hp_bar' : pygame.image.load("assets/sprites/hp_bar.png"),
             'click_sound' : pygame.mixer.Sound('assets/sons/click_sound.mp3')
             }
         
+        #Utiliza a classe de barra de vida para ambos jogadores
         self.hp_bars = {
             player1 : HpBar(characters[player1]['hp'], WIDTH/40 + 90, 48),
             player2 : HpBar(characters[player2]['hp'], 2*WIDTH/3 + 90, 2*HEIGHT/3 - 52)
@@ -39,9 +54,11 @@ class Battle:
 
         self.last_updated = pygame.time.get_ticks()
 
+        #variáveis para impedir repetição de tecla e rodar animação dos jogadores 
         self.clicked_key = False
         self.out_of_position = True
 
+        #menus de cada jogador
         self.menus_list = {
             '<- Back' : {player1 : ['Fight', 'Item', 'Run'], player2 : ['Fight', 'Item', 'Run']},
             'Fight' : {player1 : characters[player1]['attacks'], player2 : characters[player2]['attacks']},
@@ -56,6 +73,13 @@ class Battle:
         self.menu = self.menus_list[self.current_menu][self.player_attacking]
 
     def update_events(self, screens, window):
+        '''
+        Função atualiza eventos:
+        - Trata todos os eventos de entrada do usuário e determina a próxima ação na batalha
+
+        screens -> dicionário com todas as telas e variáveis principais (resultado da batalha, etc.)
+        window -> variável que armazena a janela do jogo
+        '''
         for player, bar in self.hp_bars.items():
             if bar.check_ending():
                 screens['result'] = player
@@ -66,11 +90,14 @@ class Battle:
         for ev in pygame.event.get():
             if ev.type == pygame.QUIT:
                 return QUIT
+
             if ev.type == pygame.KEYDOWN and not self.clicked_key:
                 self.clicked_key = True
                 if ev.key == pygame.K_SPACE or ev.key == pygame.K_RETURN:
                     pygame.mixer.Channel(9).play(self.assets['click_sound'])
                     self.current_menu = self.menu[self.current_item]
+
+                    #checa em qual menu você clicou ENTER
                     if self.current_menu in ['<- Back', "You can't run!", "What are you doing?", "Go fight.", 'It was a joke', 'There are no items', 'Go KICK HIM!']:
                         self.current_menu = '<- Back'
                         self.current_item = 0
@@ -83,24 +110,31 @@ class Battle:
                             self.player_attacking = self.player2
                         else:
                             self.player_attacking = self.player1
+
+                #movimentação de menu            
                 if ev.key == pygame.K_UP:
-                    pygame.mixer.Channel(9).play(self.assets['click_sound'])
                     self.current_item -= 1
                     if self.current_item < 0:
                         self.current_item = len(self.menu) - 1
                 if ev.key == pygame.K_DOWN:
-                    pygame.mixer.Channel(9).play(self.assets['click_sound'])
                     self.current_item += 1
                     if self.current_item >= len(self.menu):
                         self.current_item = 0
                 if ev.key == pygame.K_ESCAPE and self.current_menu != '<- Back':
                     self.current_menu = '<- Back'
+            
             if ev.type == pygame.KEYUP:
                 self.clicked_key = False
 
         return self.name
 
     def draw(self, window):
+        '''
+        Função desenha:
+        - De acordo com o evento da batalha, desenha na tela os personagens, os menus, a vida, etc.
+        
+        window -> variável que armazena a janela do pygame
+        '''
         window.fill((0, 0, 0))
 
         window.blit(self.assets['background'], (0, -160))
@@ -109,6 +143,7 @@ class Battle:
         ticks = pygame.time.get_ticks()
         delta_t = (ticks - self.last_updated)/1000
         
+        #se está fora de posição, apenas desenha a animação inicial dos players
         if self.out_of_position:
             self.coords['player1_x'] = self.coords['player1_x'] - 200 * delta_t
             self.coords['player2_x'] = self.coords['player2_x'] + 200 * delta_t
@@ -121,10 +156,12 @@ class Battle:
             if self.coords['player1_x'] <= 75 or self.coords['player2_x'] >= 390:
                 self.out_of_position = False
 
+        #desenhos normais para o resto da batalha
         else:
             window.blit(self.assets['player1_skin'], (self.coords['player1_x'], self.coords['player1_y']))
             window.blit(self.assets['player2_skin'], (self.coords['player2_x'], self.coords['player2_y']))
 
+            #desenha o menu de seleção
             for i in range(len(self.menu)):
                 text = self.menu[i]
                 if i == self.current_item:
@@ -134,13 +171,16 @@ class Battle:
                 
                 text_image = self.assets['font_20'].render(text, True, (0, 0, 0))
                 window.blit(text_image, (30, 347 + i * 30))
-        
+
+            #desenha as bordas das barras de HP
             window.blit(self.assets['hp_bar'], (WIDTH/40, 40))
             window.blit(self.assets['hp_bar'], (2*WIDTH/3, 2*HEIGHT/3 - 60))
 
+            #guia de minigames para cada ataque
             if self.current_menu == "Fight":
                 window.blit(self.assets['attack_colors'], (0, 0))
 
+            #desenha barras de vida
             for bar in self.hp_bars.values():
                 bar.draw_hp(window)
             
@@ -151,12 +191,22 @@ class Battle:
         pygame.display.update()
     
     def attack(self, window, attack):
+        '''
+        Função de ataque:
+        - De acordo com o ataque escolhido pelo jogador, roda minigame, recolhe as pontuações
+          dos dois jogadores e calcula o dano com multiplicador.
+
+        window -> variável que armazena a janela do pygame
+        attack -> integer que representa o index do ataque escolhido (0, 1, 2 ou 3)
+        '''
         points = [0, 0]
         attacks = [run_minigame1, run_minigame2, run_minigame3, run_minigame4]
 
+        #roda o minigame de ataque uma vez por jogador e guarda na lista de pontuação
         for player in range(2):
             points[player] = attacks[attack](window)
-    
+
+        #calcula o dano de acordo com a lógica de cada minigame
         if attack == 1:
             self.damage = 200 * points[0]/points[1]
         elif attack == 4:
@@ -164,13 +214,25 @@ class Battle:
         else:
             self.damage = 200 * points[1]/points[0]
         
+        #cap de dano máximo
         if self.damage > 300:
             self.damage = 300
 
 
 
 class HpBar():
+    '''
+    Classe HP:
+    - Barra de HP de cada jogador durante a batalha
+    '''
     def __init__(self, hp, coordx, coordy):
+        '''
+        - Inicializa a barra de vida com o seu comprimento relacionado com a quantidade de vida
+
+        hp --> quantidade de pontos de vida do jogador
+        coordx --> coordenada x de onde a barra tem que estar localizada
+        coordy --> coordenada y de onde a barra tem que estar localizada
+        '''
         self.hp = hp
         self.height = 10
         self.length = self.hp/10
@@ -180,12 +242,24 @@ class HpBar():
         self.font = pygame.font.Font(pygame.font.get_default_font(), 10)
     
     def update_hp(self, damage):
+        '''
+        Função atualiza:
+        - Atualiza o tamanho da barra de acordo com o dano recebido
+
+        damage -> integer da qtd de dano recebido pelo jogador
+        '''
         self.hp -= damage
         if self.hp < 0:
             self.hp = 0
         self.length = self.hp/10
 
     def draw_hp(self, window):
+        '''
+        Função desenha:
+        - Desenha barra de vida do jogador na sua respectiva posição
+
+        window -> variável que segura a janela do pygame
+        '''
         pygame.draw.rect(window, (0, 0, 0), pygame.Rect(self.x-2, self.y-2, 104, self.height + 4))
         pygame.draw.rect(window, (205, 20, 50), pygame.Rect(self.x, self.y, 100, self.height))
         pygame.draw.rect(window, (0, 200, 20), pygame.Rect(self.x, self.y, self.length, self.height))
@@ -193,6 +267,10 @@ class HpBar():
         window.blit(self.font.render(f"1000", True, (0, 0, 0)), (self.x - 45, self.y))
     
     def check_ending(self):
+        '''
+        Função checa final:
+        - De acordo com o comprimento da barra de vida, retorna se o jogo deve acabar ou não
+        '''
         if self.length <= 0:
             return True
         return False
