@@ -12,7 +12,7 @@
     <header>
         <div>
             <a href="./index.html">
-                <img src="./assets/raposa.png" alt="raposa loka">
+                <img src="./assets/raposa.png" style="width: 80px;" alt="raposa loka">
             </a>
         </div>
 
@@ -26,9 +26,8 @@
     </header>
 
     <div id="main">
-
-    
         <section id="section-title">
+            <br><br><br><br><br><br>
             
             <div id="texto">
                 <strong><h1>RUBROMON STADIUM</h1></strong>
@@ -40,8 +39,10 @@
 
             <ul>
                 <li>O jogo deve ser jogado por duas pessoas</li>
-                <li> Selecione o personagem que te acompanhará no campo de batalha</li>
+                <li> Selecionem os personagens que te acompanharão no campo de batalha</li>
                 <li>Se prepare para uma batalha eletrizante, escolhendo entre 4 movimentos exclusivos do seu Inspermón! </li>
+                <li>Para cada ataque, ambos jogadores jogarão um minigame. Se o atacante se sair melhor, 
+                    seu <br> movimento terá o dano aumentado. Caso contrário, o defensor sofrerá menos dano!</li>
                 <li> Ao zerar os pontos de vida do seu oponente, você se torna o campeão!</li>
                 <li>Continue batalhando para se manter no topo.</li>
             </ul>
@@ -50,13 +51,7 @@
                 by: João Lucas & Marcelo Marchetto
             </h4>
 
-            <!-- duas colunas: uma com uma print do minigame de ataque, outra como um minigame de defesa -->
-            <p>
-               
-            </p>
-            <p>
-                
-            </p>
+
             </div>
             
 
@@ -64,17 +59,27 @@
 
         <section id="section-telas-jogo">
             <h2>Telas do jogo</h2>
-            <div style="display: flex; flex-direction: row; justify-content: space-between; align-items:center; padding: 40px;">
+
+            <div class="outer-imagens">
                 
-                <img src="./assets/telajogo1.jpg" style="width: 400px; margin-right: 30px; border: black solid 4px;" alt="tela do jogo 1">
-                <img src="./assets/telajogo2.jpg" style="width: 300px; margin-left: 30px; border: black solid 4px;" alt="tela do jogo 2">
+                <div class="div-imagens">
+
+                    <img src="./assets/imagens jogo/battle.png" style="width: 400px; margin-right: 30px; border: black solid 4px;" alt="tela do jogo 1">
+                    <img src="./assets/imagens jogo/ganhador.png" style="width: 300px; margin-left: 30px; border: black solid 4px;" alt="tela do jogo 2">
+                    
+                </div>
+                <div class="div-imagens">
+
+                    <img src="./assets/imagens jogo/perso.png" style="width: 300px; margin-left: 30px; border: black solid 4px;" alt="tela do jogo 2">
+                    <img src="./assets/imagens jogo/Rubromon.png" style="width: 300px; margin-left: 30px; border: black solid 4px;" alt="tela do jogo 2">
+                </div>
             </div>
             </section>
 
         <section id="section-video">
             <h2>Vídeo do Jogo:</h2>
 
-            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" width="620" height="400"></iframe>
+            <iframe src="https://www.youtube.com/embed/5jsIvaMbwPM" width="620" height="400"></iframe>
         </section>
 
         <section id="section-download">
@@ -82,11 +87,13 @@
             <div>
                 <h3>Para fazer o download do jogo:</h3>
                 <ol>
-                    <li>Faça o  download de da linguagem Python 3</li>
-                    <li>Clique no ícone ao lado e faça o download dos arquivos</li>
+                    <li>Faça o  download da linguagem Python 3</li>
+                    <li>Clique no ícone ao lado e faça o download dos arquivos do jogo</li>
                     <li>Depois de baixar os arquivos, abra-os em um aplicativo que <br> consiga executar arquivos de Python ( recomendamos o VSCODE )</li>
+                    <li>Navegue para o arquivo "main.py", localizado no diretório "game"</li>
+                    <li>Execute o arquivo!</li>
                 </ol>
-                <p>Faça o  download de python 3. Em seguida, baixe os arquivos do jogo. <br> Por fim, navegue para o arquivo "main.py" e execute-a  </p>
+                
             </div>
 
             <div class="div-icones">
@@ -104,7 +111,7 @@
 
         <section id="section-logs">
             <div class="div-icones2">
-                <h2>Dev Logs</h2>
+                <h2>DevLogs</h2>
                 <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
                     <button>
                         <svg xmlns="http://www.w3.org/2000/svg" class="icone" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -115,9 +122,13 @@
             </div>
             
             <div>
-                <h3> Aqui voce pode acompanhar cadas coisa que a gente fez </h3>
+                <h3> Aqui você pode acompanhar cada coisa que nós fizemos! </h3>
                 
-                <h5>24/04 - Ambos</h5>
+                
+                <u>
+                    <h5>24/04 - Ambos</h5>
+                </u>
+                
                 <ul>
                     <li> Definição de workflow para o Git </li>
                     <li> Definição de design e decisões técnicas do jogo (criação e nome de classes, etc.)</li>
@@ -129,7 +140,7 @@
                         
                 </ul>
 
-                <h5>27/04 - Marcelo</h5>
+                <h5><u>27/04 - Marcelo</u></h5>
                 <ul>
                 
                     <li>Início e quase término do minigame 2 (Digitação rápida de palavras)</li>
@@ -138,7 +149,7 @@
                     
                 </ul>
 
-                <h5>27/04 - João</h5>
+                <h5><u>27/04 - João</u></h5>
                 <ul>
 
                     <li>Término da tela de escolha de modo</li>
@@ -149,7 +160,7 @@
                     <li>Adaptação e teste de imagens no jogo</li>
                 </ul>
                 
-                <h5>28/04 - Marcelo</h5>
+                <h5><u>28/04 - Marcelo</u></h5>
                 <ul>
                 
                     <li>Finalização dos dois minigames.</li>
@@ -157,7 +168,7 @@
                     <li>integração de um minigame com o código principal do jogo</li>
 
                 </ul>
-                <h5>28/04 - João</h5>
+                <h5><u>28/04 - João</u></h5>
                 <ul>
 
                     <li>Melhora da tela de batalha</li>                    
@@ -166,20 +177,35 @@
                     <li>Decisão de personalização de todos os personagens e suas características</li>                    
                 </ul>
 
-                <h5>02/05 - Marcelo</h5>
+                <h5><u>02/05 - Marcelo</u></h5>
                 <ul>
                     <li>Padronização do código dos 4 minigames</li>
                     <li>Criação de sprites para fundos de tela</li>
                 </ul>
 
                 
-                <h5>02/05 - João</h5>
+                <h5><u>02/05 - João</u></h5>
                 <ul>
                     <li>Implementação de todos os 4 minigames no código principal</li>
                     <li>Música de batalha</li>
                     <li>Sprites de batalha e seleção de personagem</li>
                     <li>Animação de entrada de batalha</li>
                     <li>Melhora de assets e sprites</li>
+                </ul>
+
+                <h5><u>04/05 - Marcelo</u></h5>
+                <ul>
+                    <li>Finalização do site de acordo com as melhorias propostas por colegas</li>
+                    <li>Coleta de sons para serem colocados no game</li>
+                    <li>Criação de mais imagens para serem colocadas</li>
+                </ul>
+                <h5><u>04/05 - João</u></h5>
+                <ul>
+                    <li>Finalização da primeira versão entregável do Jogo</li>
+                    <li>Implementação de sons e músicas novas</li>
+                    <li>Implementação de novas imagens no jogo</li>
+                    <li>Correção de Bugs</li>
+                    <li> Eliminação do singleplayer</li>
                 </ul>
                 
             </div>
@@ -255,6 +281,94 @@
                 </button>
             </div>
 
+        </section>
+
+
+        <section id="section-antes-depois">
+
+            <u><h3>Antes e depois do Site</h3></u>
+
+            <h4> Problema 1 - Baixa visilibilidade no título.</h4>
+            <p>Solução - aumentar o Blur do background</p>
+            <div class="comparacao">
+                <div>
+                    <img src="./assets/antes-depois/blur1.png" class="comp-img" alt="">
+                    <p>Antes</p>
+
+                </div>
+                <div>
+                    <img src="./assets/antes-depois/blur2.png" class="comp-img" alt="">
+                    <p>Depois</p>
+                </div>
+
+            </div>
+            <h4>Problema 2 - Falta de Contraste</h4>
+            <p>Solução - sublinhar subtítulos para destaque</p>
+            <div class="comparacao">
+                <div>
+                    <img src="./assets/antes-depois/contraste1.png" class="comp-img" alt="">
+                    <p>Antes</p>
+
+                </div>
+                <div>
+                    <img src="./assets/antes-depois/contraste2.png" class="comp-img" alt="">
+                    <p>Depois</p>
+                </div>
+
+            </div>
+            <h4>Problema 3 - Instruções para download não eram claras</h4>
+            <p>Solução - adicionar mais passos para instalação</p>
+            <div class="comparacao">
+                <div>
+                    <img src="./assets/antes-depois/download1.png" class="comp-img" alt="">
+                    <p>Antes</p>
+
+                </div>
+                <div>
+                    <img src="./assets/antes-depois/download2.png" class="comp-img" alt="">
+                    <p>Depois</p>
+                </div>
+
+            </div>
+            <h4>Problema 4 - Header não era fixo</h4>
+            <p>Solução - Fixar a div do header</p>
+            <div class="comparacao">
+                <div>
+                    <img src="./assets/antes-depois/header1.png" class="comp-img" alt="">
+                    <p>Antes</p>
+
+                </div>
+                <div>
+                    <img src="./assets/antes-depois/header2.png" class="comp-img" alt="">
+                    <p>Depois</p>
+                </div>
+
+            </div>
+            <h4>Problema 5 - Pontuações e gramática</h4>
+            <p>Solução - Revisão textual</p>
+            <div class="comparacao">
+                <div>
+                    <img src="./assets/antes-depois/portugues1.png" class="comp-img" alt="">
+                    <p>Antes</p>
+
+                </div>
+                <div>
+                    <img src="./assets/antes-depois/portugues2.png" class="comp-img" alt="">
+                    <p>Depois</p>
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+        <section id="section-maps">
+            <h3>Feito com amor at:</h3>
+            <div class="map">
+
+                <iframe  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7312.319598087557!2d-46.68083596511226!3d-23.59860129999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce575374b7481f%3A0x50e5aad2656c43ed!2sInsper%20Instituto%20de%20Ensino%20e%20Pesquisa!5e0!3m2!1spt-BR!2sbr!4v1651775480527!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
         </section>
 
     </div>

@@ -2,6 +2,10 @@
     --cinza: #F0F0F1;
 }
 
+.main{
+    margin-top: 100px;
+}
+
 section{
     height: 300px;
 }
@@ -28,6 +32,10 @@ header{
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    background-image: var(--gradient);
+    position: fixed;
+    width: 100%;
+    z-index: 100;
     
     margin: 0px;
     padding: 10px;
@@ -42,14 +50,27 @@ header{
     flex-direction: row;
     
 }
+.outer-imagens{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+}
+.div-imagens{
+    gap: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 
-
-img{
-    width: 80px;
-    
 }
 
+.comp-img{
+    width: 400px;
+}
 #section-title{
+    
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -59,6 +80,7 @@ img{
     background-size: cover;  
     border-top: black solid 4px;
     border-bottom: black solid 4px;
+    
     
     
 }
@@ -71,6 +93,8 @@ img{
     justify-content: center;
 
     padding: 30px;
+    height: auto;
+    gap: 40px;
 }
 
 #section-video{
@@ -146,7 +170,8 @@ button{
 }
 
 #texto{
-    background: rgba( 255, 255, 255, 0.2 );
+
+    background: rgba( 255, 255, 255, 0.8 );
     box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
     backdrop-filter: blur( 9px );
     -webkit-backdrop-filter: blur( 9px );
@@ -215,4 +240,43 @@ a:active {
 a[tabindex]:focus {
     color:blue;
     outline: none;
+}
+
+#section-maps{
+    
+    height: auto;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 10%;
+}
+
+#section-antes-depois{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    padding: 80px;
+    
+}
+
+.map{
+    border: solid black 4px;
+    height: auto;
+    width: auto;
+    border-radius: 4px;
+}
+
+.comparacao{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10%;
+    margin: 20px;
+    
 }
