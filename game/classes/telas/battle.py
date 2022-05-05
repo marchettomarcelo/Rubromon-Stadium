@@ -24,6 +24,9 @@ class Battle:
         self.name = BATTLE
         self.player1 = player1
         self.player2 = player2
+
+        self.velp1 = 50
+        self.velp2 = -50
         
         self.assets = {
             'font_20' : pygame.font.Font(pygame.font.get_default_font(), 20),
@@ -40,8 +43,8 @@ class Battle:
         
         #Utiliza a classe de barra de vida para ambos jogadores
         self.hp_bars = {
-            player1 : HpBar(characters[player1]['hp'], WIDTH/40 + 90, 48),
-            player2 : HpBar(characters[player2]['hp'], 2*WIDTH/3 + 90, 2*HEIGHT/3 - 52)
+            player2 : HpBar(characters[player1]['hp'], WIDTH/40 + 90, 48),
+            player1 : HpBar(characters[player2]['hp'], 2*WIDTH/3 + 90, 2*HEIGHT/3 - 52)
         }
         self.damage = 0
 
@@ -80,6 +83,7 @@ class Battle:
         screens -> dicionário com todas as telas e variáveis principais (resultado da batalha, etc.)
         window -> variável que armazena a janela do jogo
         '''
+
         for player, bar in self.hp_bars.items():
             if bar.check_ending():
                 screens['result'] = player
@@ -87,10 +91,37 @@ class Battle:
 
         self.menu = self.menus_list[self.current_menu][self.player_attacking]
 
+
+        self.ticks = pygame.time.get_ticks()
+        delta_t = (self.ticks - self.last_updated)/1000
+
+        #se está fora de posição, move os players para o centro
+        if self.out_of_position:
+            self.coords['player1_x'] = self.coords['player1_x'] - 200 * delta_t
+            self.coords['player2_x'] = self.coords['player2_x'] + 200 * delta_t
+
+            if self.coords['player1_x'] <= 75 or self.coords['player2_x'] >= 390:
+                self.coords['player_x'] = 75
+                self.coords['player2_x'] = 390
+                self.out_of_position = False
+
+        #animação normal do jogo de movimentação natural
+        else:
+            self.coords['player1_x'] = self.coords['player1_x'] + self.velp1 * delta_t
+            self.coords['player2_x'] = self.coords['player2_x'] + self.velp2 * delta_t
+
+            if self.coords['player2_x'] >= 450 or self.coords['player2_x'] <= 390:
+                self.coords['player1_x'] = self.coords['player1_x'] - self.velp1 * delta_t
+                self.coords['player2_x'] = self.coords['player2_x'] - self.velp2 * delta_t
+                self.velp1 *= -1
+                self.velp2 *= -1
+
         for ev in pygame.event.get():
             if ev.type == pygame.QUIT:
                 return QUIT
 
+            if ev.type == pygame.MOUSEBUTTONDOWN:
+                print(pygame.mouse.get_pos())
             if ev.type == pygame.KEYDOWN and not self.clicked_key:
                 self.clicked_key = True
                 if ev.key == pygame.K_SPACE or ev.key == pygame.K_RETURN:
@@ -126,6 +157,8 @@ class Battle:
             if ev.type == pygame.KEYUP:
                 self.clicked_key = False
 
+
+        self.last_updated = self.ticks
         return self.name
 
     def draw(self, window):
@@ -140,27 +173,14 @@ class Battle:
         window.blit(self.assets['background'], (0, -160))
         window.blit(self.assets['battle_border'], (0, 320) )
 
-        ticks = pygame.time.get_ticks()
-        delta_t = (ticks - self.last_updated)/1000
-        
-        #se está fora de posição, apenas desenha a animação inicial dos players
+
+        #desenhos os personagens em suas posições e o texto correspondente
+        window.blit(self.assets['player2_skin'], (self.coords['player2_x'], self.coords['player2_y']))
+        window.blit(self.assets['player1_skin'], (self.coords['player1_x'], self.coords['player1_y']))
         if self.out_of_position:
-            self.coords['player1_x'] = self.coords['player1_x'] - 200 * delta_t
-            self.coords['player2_x'] = self.coords['player2_x'] + 200 * delta_t
-
-            window.blit(self.assets['player2_skin'], (self.coords['player2_x'], self.coords['player2_y']))
-            window.blit(self.assets['player1_skin'], (self.coords['player1_x'], self.coords['player1_y']))
-
             window.blit(self.assets['font_30'].render(f"{self.player2} wants to battle!", True, (0, 0, 0)), (30, 2*HEIGHT/3 + HEIGHT/7))
 
-            if self.coords['player1_x'] <= 75 or self.coords['player2_x'] >= 390:
-                self.out_of_position = False
-
-        #desenhos normais para o resto da batalha
         else:
-            window.blit(self.assets['player1_skin'], (self.coords['player1_x'], self.coords['player1_y']))
-            window.blit(self.assets['player2_skin'], (self.coords['player2_x'], self.coords['player2_y']))
-
             #desenha o menu de seleção
             for i in range(len(self.menu)):
                 text = self.menu[i]
@@ -187,7 +207,6 @@ class Battle:
             window.blit(self.assets['font_20'].render(f"Attacker:", True, (0, 0, 0)), (400, 347))
             window.blit(self.assets['font_20'].render(f"{self.player_attacking}", True, (0, 0, 0)), (400, 377))
 
-        self.last_updated = ticks
         pygame.display.update()
     
     def attack(self, window, attack):
